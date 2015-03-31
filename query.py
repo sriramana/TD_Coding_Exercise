@@ -2,8 +2,9 @@ import os
 import tdclient
 import time
 import argparse
-
+#Import TD API Key
 apikey = os.getenv("TD_API_KEY")
+
 #Parsing Command Line arguments.
 parser = argparse.ArgumentParser()
 parser.add_argument('--engine','-e',default='presto',choices=['presto','hive'], help="Select hive or presto as query engine, if not defined default is hive")
@@ -21,16 +22,20 @@ table = args.table_name
 column = args.column_names
 minimum = args.min
 maximum = args.MAX
+
 # Modifiying Min time and Max time from NULL to unixtimestamps
 if minimum == 'NULL':
 	minimum = str(0)
 
 if maximum == 'NULL':
-	maximum = str(253402300799)
+	maximum = str(253402300799) #Max Unixtimestamp value
 
 #TD Python API for Query	
 with tdclient.Client(apikey) as client:
-	job=client.query(database,"SELECT " +column+" FROM "+table+" WHERE symbol = 'WLFC' AND TD_TIME_RANGE(time,"+minimum+","+maximum+")", type=query_type)
+	job=client.query(database,"SELECT " +column+" FROM "+table+" WHEREsymbol = 'WLFC' AND TD_TIME_RANGE(time,"+minimum+","+maximum+")", type=query_type)
+	print 'Job is '+job.status()
+	if job.status() == 'error':
+		print "Query failed. Please check your query"
 	while not job.finished():
 		time.sleep(2)
 	f = open("query_results."+file_type,"w")
