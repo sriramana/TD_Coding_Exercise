@@ -15,7 +15,7 @@
 <p>It will run a "SELECT &lt;col_list&gt; FROM &lt;table_name&gt; WHERE TD_TIME_RANGE(time, &lt;min_time&gt;, &lt;max_time&gt;)" query where the arguments in between &lt;&gt; are substituted with the values provided to the command. In particular &lt;min_time&gt; and &lt;max_time&gt; will narrow the SELECT to only a subset of the records in the table specified based on the time column. </p>
 
 
-<p><b>Usage: query -f csv -e hive -c 'my_col1,my_col2,my_col5' -m 1427347140 -M 1427350725 my_db my_table</b></p>
+<p><b>Usage: query -f csv -e hive -c 'my_col1,my_col2,my_col5' -m min_unixtime -M max_unixtime my_db my_table</b></p>
 
 <pre><code>
 PS C:\Users\sramana\Documents\GitHub\TD_Coding_Exercise> ./query -h
