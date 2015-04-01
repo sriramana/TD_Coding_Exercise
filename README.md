@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <body>
 <header><h3>Treasure Data Coding Exercise</h3></header>
