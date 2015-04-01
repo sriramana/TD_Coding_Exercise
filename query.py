@@ -32,7 +32,7 @@ if maximum == 'NULL':
 
 #TD Python API for Query	
 with tdclient.Client(apikey) as client:
-	job=client.query(database,"SELECT " +column+" FROM "+table+" WHERE symbol = 'WLFC' AND TD_TIME_RANGE(time,"+minimum+","+maximum+")", type=query_type)
+	job=client.query(database,"SELECT " +column+" FROM "+table+" WHERE TD_TIME_RANGE(time,"+minimum+","+maximum+")", type=query_type)
 	print 'Job is '+job.status()
 	while not job.finished():
 		time.sleep(2)
